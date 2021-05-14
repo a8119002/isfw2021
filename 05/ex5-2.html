@@ -26,6 +26,43 @@
             document.getElementById('tf1').value = "";
             document.getElementById('tf2').value = "";
         }
+        function button1Pressed() {
+                doSelect();
+            }
+            function button2Pressed() {
+                doChoose();
+            }
+
+            async function doSelect() {
+                var sql = 'select * from Tweets order by time desc limit 20';
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<ul>';
+                for (var i = 0; i < objects.length; i++) {
+                    var object = objects[i];
+                    html = html + '<li>' + object.id + '、' + object.name + '、' + object.tweet + '</li>';
+                }
+                html = html + '</ul>';
+                document.getElementById('result').innerHTML = html;
+            }
+
+            async function doChoose() {
+                var content = document.getElementById('contentName');
+                console.log(content.value);
+                var sql = `select * from Tweets where tweet like '${content.value}'`;
+                var objects = await osql.connect(sql);
+                console.log(objects);
+                var html = '';
+                html = html + '<ul>';
+                for (var i = 0; i < objects.length; i++) {
+                    var object = objects[i];
+                    html = html + '<li>' + object.id + '、' + object.name + '、' + object.tweet + '</li>';
+                }
+                html = html + '</ul>';
+                document.getElementById('box').innerHTML = html;
+            }
+
     </script>
 
 </head>
@@ -39,6 +76,13 @@
     <button onclick="button1Pressed()">tweet</button>
     <br>
     <p id="result"></p>
+    <button onclick="button1Pressed()">X</button>
+    <hr>
+    <p id="result">xxxx</p>
+    <p>ツイートを検索します</p>
+    <input type="text" name="contentName" id="contentName">
+    <button onclick="button2Pressed()"></button>
+    <div id="box"></div>
 </body>
 
 </html>
