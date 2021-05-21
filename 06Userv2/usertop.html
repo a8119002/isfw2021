@@ -9,24 +9,31 @@
     <script type="text/javascript" src="../settings.js"></script>
     <script type="text/javascript" src="../osql.js"></script>
 
-    <script>
-        $().ready(function(){
-            init();
-        });
-        function init(){
-            var name = sessionStorage.getItem('username');
-            console.log(name);
-            $('#welcome').html(`ようこそ${name}さん`);
-        }
-    </script>
+    
 
 </head>
 
 <body>
     <h1>ユーザトップ</h1>
     <p id="welcome">ようこそxxさん</p>
+    <button id="toUpdate"></button>
     <hr>
 
+<script>
+    $().ready(function () {
+        init();
+    });
+    function init() {
+        var name = sessionStorage.getItem('username');
+        console.log(name);
+        $('#welcome').html(`ようこそ${name}さん`);
+    }
+
+    $('#toUpdate').on('click', () => {
+        var id = sessionStorage.getItem('userid');
+        location.href = `update.html?userid=${id}`;
+    })
+</script>
 </body>
 
 </html>
