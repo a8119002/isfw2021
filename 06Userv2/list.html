@@ -15,14 +15,19 @@
 
 <body>
     <h1>Users</h1>
+    <span>ID: </span>
     <input type="text" id="usersid">
-    <button id="deleteButton"></button>
+    <button onclick="buttonPressed()">削除</button>
     <p id="result">xxxx</p>
 
     <script>
         $(document).ready(function () {
             execSelect();
         });
+
+        function buttonPressed() {
+            doDelete();
+        }
 
         async function execSelect() {
             var sql = 'select * from Users';
@@ -42,10 +47,14 @@
             document.getElementById('result').innerHTML = html;
         }
 
-        $('#deleteButton').on('click', ()=>{
-            var id = $('#usersid').val();
-            console.log(id);
-        });
+        async function doDelete() {
+            var userid = document.getElementById('usersid');
+            console.log(userid.value);
+            var sql = `delete from Users where id = "${userid.value}"`;
+            var objects = await osql.connect(sql);
+            console.log(objects);
+        }
+
     </script>
 </body>
 
