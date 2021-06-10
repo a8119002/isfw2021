@@ -16,7 +16,8 @@
 <body>
     <h1>ユーザトップ</h1>
     <p id="welcome">ようこそxxさん</p>
-    <button id="toUpdate"></button>
+    <button id="toUpdate">ユーザートップ</button>
+    <button id="toTweet">ツイート</button>
     <hr>
 
 <script>
@@ -33,6 +34,11 @@
         var id = sessionStorage.getItem('userid');
         location.href = `update.html?userid=${id}`;
     })
+
+    $('#toTweet').on('click', () => {
+            var id = sessionStorage.getItem('userid');
+            location.href = `tweet.html?userid=${id}`;
+        })
 </script>
 </body>
 
