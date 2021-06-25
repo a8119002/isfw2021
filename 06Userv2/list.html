@@ -23,10 +23,12 @@
     <script>
         $(document).ready(function () {
             execSelect();
+            var value = $('p > button').attr('onclick', 'button2Pressed');
+            console.log(value);
         });
 
         function buttonPressed() {
-            doDelete();
+            doDeletePaticular();
         }
 
         async function execSelect() {
@@ -41,13 +43,14 @@
                 html = html + '<td>' + object.id + '</td>';
                 html = html + '<td>' + object.name + '</td>';
                 html = html + '<td>' + '<a href="update.html?userid=' + object.id + '">変更</a>' + '</td>';
+                html = html + '<td>' + '<button>削除</button>' + '<td>';
                 html = html + '</tr>';
             }
             html = html + '</table>';
             document.getElementById('result').innerHTML = html;
         }
 
-        async function doDelete() {
+        async function doDeletePaticular() {
             var userid = document.getElementById('usersid');
             console.log(userid.value);
             var sql = `delete from Users where id = "${userid.value}"`;
